@@ -23,7 +23,7 @@ COPY pipelines.yml ${LOGSTASH_HOME}/config/
 COPY logstash.yml ${LOGSTASH_HOME}/config/
 
 # Create a data volume and map it to the G: drive, allowing Java to call Path.toRealPath() successfully
-VOLUME c:/data
+VOLUME c:/logstash_data
 RUN Set-Variable -Name 'regpath' -Value 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices' ; \
     Set-ItemProperty -path $regpath -Name 'H:' -Value '\??\C:\logstash_data' -Type String ;
 

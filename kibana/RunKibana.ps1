@@ -1,0 +1,1 @@
+cmd.exe /c ($Env:KIBANA_HOME + '/bin/kibana.bat')

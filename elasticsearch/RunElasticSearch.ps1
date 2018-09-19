@@ -1,0 +1,1 @@
+cmd.exe /c ($Env:ELASTIC_HOME + '/bin/elasticsearch.bat')

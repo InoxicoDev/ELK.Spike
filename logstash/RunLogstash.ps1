@@ -1,0 +1,1 @@
+cmd.exe /c ($Env:LOGSTASH_HOME + '/bin/logstash.bat')

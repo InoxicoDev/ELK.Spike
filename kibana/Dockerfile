@@ -18,7 +18,6 @@ RUN powershell.exe -Command \
 ENV KIBANA_HOME C:\\${KIBANA_SOURCE}
 
 COPY kibana.yml /${KIBANA_SOURCE}/config/
-COPY kibana.bat /${KIBANA_SOURCE}/bin/
 
 COPY RunKibana.ps1 /
 CMD ["powershell", "-File", "C:/RunKibana.ps1"]

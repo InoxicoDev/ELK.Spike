@@ -9,15 +9,6 @@ There is also a test C# application which uses NLog that can be used to log some
 ## Before you can start...
 
 1. Download Java for Servers from [Oracle's Java Downloads](http://www.oracle.com/technetwork/java/javase/downloads/server-jre8-downloads-2133154.html) after accepting the license agreement.
-2. Extract the tarball to a folder called "sources" in the same folder as the Dockerfile.
+2. Extract the tarball to a folder called "sources" in the root of the repo.
+3. Run the `setup_jdk.ps1` script to make sure it is accessible to the docker images for build.
 
-
-## To Run:
-
-> docker images
-
-Look for the `elastic search` and `kibana` images and copy their `Image ID`.
-
-> docker run --name elasticsearch --rm -p 9200:9200 -p 9300:9300 {Elastic Image ID}
->
-> docker run --rm --link {Elastic Image ID} -p 5601:5601 {Kibana Image ID}

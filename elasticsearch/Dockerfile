@@ -21,7 +21,8 @@ COPY elasticsearch.yml ${ELASTIC_HOME}/config/
 
 # Create a data volume and map it to the G: drive, allowing Java to call Path.toRealPath() successfully
 VOLUME c:/elastic_data
-RUN Set-Variable -Name 'regpath' -Value 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices' ; \
+RUN powershell.exe -Command \
+    Set-Variable -Name 'regpath' -Value 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices' ; \
     Set-ItemProperty -path $regpath -Name 'G:' -Value '\??\C:\elastic_data' -Type String ;
 
 ENV ES_JAVA_OPTS -Xms512m -Xmx512m

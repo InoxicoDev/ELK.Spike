@@ -11,7 +11,8 @@ ARG ELASTICSEARCH_SOURCE=elasticsearch-oss-${ELASTICSEARCH_VERSION}
 ENV ELASTICSEARCH_PATH=elasticsearch-${ELASTICSEARCH_VERSION}
 
 # Extract Elasticsearch
-RUN Expand-Archive -Path \$($Env:ELASTICSEARCH_SOURCE).zip -DestinationPath \ ; \
+RUN powershell.exe -Command \
+    Expand-Archive -Path \$($Env:ELASTICSEARCH_SOURCE).zip -DestinationPath \ ; \
     Remove-Item -Path \$($Env:ELASTICSEARCH_SOURCE).zip ;
 
 ENV ELASTIC_HOME C:\\${ELASTICSEARCH_PATH}

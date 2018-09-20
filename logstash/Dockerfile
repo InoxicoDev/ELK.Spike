@@ -11,7 +11,8 @@ ARG LOGSTASH_SOURCE=logstash-oss-${LOGSTASH_VERSION}
 ENV LOGSTASH_PATH=logstash-${LOGSTASH_VERSION}
 
 # Extract LogStash
-RUN Expand-Archive -Path \$($Env:LOGSTASH_SOURCE).zip -DestinationPath \ ; \
+RUN powershell.exe -Command \
+    Expand-Archive -Path \$($Env:LOGSTASH_SOURCE).zip -DestinationPath \ ; \
     Remove-Item -Path \$($Env:LOGSTASH_SOURCE).zip ;
 
 ENV LOGSTASH_HOME C:\\${LOGSTASH_PATH}

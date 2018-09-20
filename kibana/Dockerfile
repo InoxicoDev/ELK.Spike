@@ -12,8 +12,8 @@ ADD ["https://artifacts.elastic.co/downloads/kibana/${KIBANA_SOURCE}.zip", "/"]
 
 # Extracting the archive can take a while unless this step is cached already
 RUN powershell.exe -Command \
-  Expand-Archive -Path \$($Env:KIBANA_PATH).zip -DestinationPath \ ; \
-  Remove-Item -Path \$($Env:KIBANA_PATH).zip;
+  Expand-Archive -Path \$($Env:KIBANA_SOURCE).zip -DestinationPath \ ; \
+  Remove-Item -Path \$($Env:KIBANA_SOURCE).zip;
 
 # ELASTIC_HOME is used by the runelasticsearch.cmd file to launch Elasticsearch.
 ENV KIBANA_HOME C:\\${KIBANA_PATH}

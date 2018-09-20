@@ -10,9 +10,7 @@ RUN for /d %i in (jdk*) do setx /m JAVA_HOME %~fi
 ARG ELASTICSEARCH_SOURCE=elasticsearch-oss-${ELASTICSEARCH_VERSION}
 ENV ELASTICSEARCH_PATH=elasticsearch-${ELASTICSEARCH_VERSION}
 
-# Download and extract Elasticsearch
-SHELL ["powershell.exe", "-Command"]
-ADD ["https://artifacts.elastic.co/downloads/elasticsearch/${ELASTICSEARCH_SOURCE}.zip", "/"]
+# Extract Elasticsearch
 RUN Expand-Archive -Path \$($Env:ELASTICSEARCH_SOURCE).zip -DestinationPath \ ; \
     Remove-Item -Path \$($Env:ELASTICSEARCH_SOURCE).zip ;
 

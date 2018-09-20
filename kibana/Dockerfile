@@ -5,10 +5,7 @@ ARG KIBANA_VERSION=6.4.1
 ARG KIBANA_SOURCE=kibana-oss-${KIBANA_VERSION}-windows-x86_64
 ARG KIBANA_PATH=kibana-${KIBANA_VERSION}-windows-x86_64
 
-SHELL ["powershell.exe", "-Command"]
-
-# Download and extract Kibana
-ADD ["https://artifacts.elastic.co/downloads/kibana/${KIBANA_SOURCE}.zip", "/"]
+COPY sources /
 
 # Extracting the archive can take a while unless this step is cached already
 RUN powershell.exe -Command \

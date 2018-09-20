@@ -10,9 +10,7 @@ RUN for /d %i in (jdk*) do setx /m JAVA_HOME %~fi
 ARG LOGSTASH_SOURCE=logstash-oss-${LOGSTASH_VERSION}
 ENV LOGSTASH_PATH=logstash-${LOGSTASH_VERSION}
 
-# Download and extract LogStash
-SHELL ["powershell.exe", "-Command"]
-ADD ["https://artifacts.elastic.co/downloads/logstash/${LOGSTASH_SOURCE}.zip", "/"]
+# Extract LogStash
 RUN Expand-Archive -Path \$($Env:LOGSTASH_SOURCE).zip -DestinationPath \ ; \
     Remove-Item -Path \$($Env:LOGSTASH_SOURCE).zip ;
 

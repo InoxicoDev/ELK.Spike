@@ -10,15 +10,20 @@ There is also a test C# application which uses [NLog.StructuredLogging.Json](htt
 
 1. Download Java for Servers from [Oracle's Java Downloads](http://www.oracle.com/technetwork/java/javase/downloads/server-jre8-downloads-2133154.html) after accepting the license agreement.
 2. Extract the tarball to a folder called "sources" in the root of the repo.
-3. Run the `setup_jdk.ps1` script to make sure it is accessible to the docker images for build.
+3. Run the `setup_sources.ps1` script to make sure all the required applications are accessible to the docker images for build.
+
+## Building the images
+
+If you want to make some config changes, view and edit the config files in the relevant app folders first.
+Run the `build_all.ps1` script.
 
 ## Running the images
 
 Run the "run" scripts in the sequence they are labeled in, in different terminals.
 
-## Runnin the test
+## Running the test
 
-Compile and run the application found in the "tests" folder.
+Compile and run the `Logstash Logger` application found in the "tests" folder.
 
 ## Checking results
 

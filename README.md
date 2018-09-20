@@ -15,7 +15,9 @@ There is also a test C# application which uses NLog that can be used to log some
 ## To Run:
 
 > docker images
+
 Look for the `elastic search` and `kibana` images and copy their `Image ID`.
 
 > docker run --name elasticsearch --rm -p 9200:9200 -p 9300:9300 <Elastic Image ID>
+>
 > docker run --rm --link <Elastic Image ID> -p 5601:5601 <Kibana Image ID>

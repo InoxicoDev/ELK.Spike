@@ -12,3 +12,10 @@ There is also a test C# application which uses NLog that can be used to log some
 2. Extract the tarball to a folder called "sources" in the root of the repo.
 3. Run the `setup_jdk.ps1` script to make sure it is accessible to the docker images for build.
 
+## Running the images
+
+Run the "run" scripts in the sequence they are labeled in, in different terminals.
+
+## Runnin the test
+
+Compile and run the application found in the "tests" folder.

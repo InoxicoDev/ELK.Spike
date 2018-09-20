@@ -1,4 +1,4 @@
-$TargetVersionELK = 6.4.1
+$TargetVersionELK = "6.4.1"
 
 $ElasticSearchOssZipFile = "elasticsearch-oss-${TargetVersionELK}.zip"
 $LogstashOssZipFile = "logstash-oss-${TargetVersionELK}.zip"

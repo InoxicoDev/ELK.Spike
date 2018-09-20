@@ -16,12 +16,13 @@ if($null -ne $jdkFolder) {
 
 $elasticSearchZipPath = "sources\\" + $ElasticSearchOssZipFile
 DownloadIfMissing $elasticSearchZipPath $ElasticSearchOssDownloadUri
-Copy-Item -Path $elasticSearchZipPath -Destination "elasticsearch\\sources\\${ElasticSearchOssZipFile}"
+Copy-Item -Path $elasticSearchZipPath -Destination "elasticsearch\\sources\\${ElasticSearchOssZipFile}" -Force
 
 $logstashZipPath = "sources\\" + $LogstashOssZipFile
 DownloadIfMissing $logstashZipPath $LogstashOssDownloadUri
-Copy-Item -Path $logstashZipPath -Destination "logstash\\sources\\${LogstashOssZipFile}"
+Copy-Item -Path $logstashZipPath -Destination "logstash\\sources\\${LogstashOssZipFile}" -Force
 
 $kibanaZipPath = "sources\\" + $KibanaOssZipfile
 DownloadIfMissing $kibanaZipPath $KibanaOssDownloadUri
-Copy-Item -Path $kibanaZipPath -Destination "kibana\\sources\\${KibanaOssZipfile}"
+New-Item -ItemType directory -Force "kibana\\sources" > $null
+Copy-Item -Path $kibanaZipPath -Destination "kibana\\sources\\${KibanaOssZipfile}" -Force

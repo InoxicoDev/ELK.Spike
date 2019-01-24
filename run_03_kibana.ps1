@@ -1,1 +1,0 @@
-docker run --name kibana --link elasticsearch --rm -p 5601:5601 kibana

@@ -8,6 +8,8 @@ There is also a test C# application which uses [NLog.StructuredLogging.Json](htt
 
 ## Before you can start...
 
+Make sure you have [docker](https://hub.docker.com/editions/community/docker-ce-desktop-windows) installed (with compose).
+
 Run the `setup_sources.ps1` script to make sure all the required applications are accessible to the docker images for build.
 This will download the OpenJDK from [https://github.com/ojdkbuild/ojdkbuild](https://github.com/ojdkbuild/ojdkbuild) for running Java on a windows platform as well as the ELK stack binaries.
 
@@ -18,7 +20,7 @@ Run the `build_all.ps1` script.
 
 ## Running the images
 
-Run the "run" scripts in the sequence they are labeled in, in different terminals.
+Run the `run_all.ps1` script to startup everything in order using `docker-compose`.
 
 ## Running the test
 

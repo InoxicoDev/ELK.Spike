@@ -1,0 +1,23 @@
+version: '2.4'
+services:
+  elasticsearch:
+    image: elasticsearch:latest
+    mem_limit: 4g
+    networks:
+      - elastic-stack
+  
+  logstash:
+    image: logstash:latest
+    ports: [ '9201:9201' ]
+    networks:
+      - elastic-stack
+    mem_limit: 4g
+
+  kibana:
+    image: kibana:latest
+    ports: [ '5601:5601' ]
+    networks:
+      - elastic-stack
+
+networks:
+  elastic-stack:

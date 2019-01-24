@@ -8,6 +8,15 @@ function DownloadIfMissing ($expectedZipLocation, $downloadUri) {
     }
 }
 
+New-Item -ItemType directory -Force "elasticsearch\\sources" > $null
+New-Item -ItemType directory -Force "logstash\\sources" > $null
+New-Item -ItemType directory -Force "kibana\\sources" > $null
+
+$openJdkZipPath = "sources\\" + $OpenJDKZipFile
+DownloadIfMissing $openJdkZipPath $OpenJDKUri
+if ((Test-Path -Path "sources\\java*" -Exclude *.zip) -eq $false) {
+    Expand-Archive -Path $openJdkZipPath -DestinationPath "sources"
+}
 $jdkFolder = Get-JDK-App "sources"
 if($null -ne $jdkFolder) {
     Copy-App $jdkFolder "sources" "elasticsearch\\sources\\"
@@ -19,10 +28,9 @@ DownloadIfMissing $elasticSearchZipPath $ElasticSearchOssDownloadUri
 Copy-Item -Path $elasticSearchZipPath -Destination "elasticsearch\\sources\\${ElasticSearchOssZipFile}" -Force
 
 $logstashZipPath = "sources\\" + $LogstashOssZipFile
-DownloadIfMissing $logstashZipPath $LogstashOssDownloadUri
+DownloadIfMissing $logstashZipPath $LogstashOssDownloadUr
 Copy-Item -Path $logstashZipPath -Destination "logstash\\sources\\${LogstashOssZipFile}" -Force
 
 $kibanaZipPath = "sources\\" + $KibanaOssZipfile
 DownloadIfMissing $kibanaZipPath $KibanaOssDownloadUri
-New-Item -ItemType directory -Force "kibana\\sources" > $null
 Copy-Item -Path $kibanaZipPath -Destination "kibana\\sources\\${KibanaOssZipfile}" -Force

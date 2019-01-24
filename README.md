@@ -8,9 +8,8 @@ There is also a test C# application which uses [NLog.StructuredLogging.Json](htt
 
 ## Before you can start...
 
-1. Download Java for Servers from [Oracle's Java Downloads](http://www.oracle.com/technetwork/java/javase/downloads/server-jre8-downloads-2133154.html) after accepting the license agreement.
-2. Extract the tarball to a folder called "sources" in the root of the repo.
-3. Run the `setup_sources.ps1` script to make sure all the required applications are accessible to the docker images for build.
+Run the `setup_sources.ps1` script to make sure all the required applications are accessible to the docker images for build.
+This will download the OpenJDK from [https://github.com/ojdkbuild/ojdkbuild](https://github.com/ojdkbuild/ojdkbuild) for running Java on a windows platform as well as the ELK stack binaries.
 
 ## Building the images
 

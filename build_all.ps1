@@ -8,6 +8,6 @@ Push-Location logstash
 docker build --tag logstash --build-arg LOGSTASH_VERSION=$TargetVersionELK .
 Pop-Location
 
-# Push-Location kibana
-# docker build --tag kibana --build-arg KIBANA_VERSION=$TargetVersionELK .
-# Pop-Location
+Push-Location kibana
+docker build --tag kibana --build-arg KIBANA_VERSION=$TargetVersionELK .
+Pop-Location

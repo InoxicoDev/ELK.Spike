@@ -2,7 +2,7 @@
     pipeline.workers: 1
     pipeline.batch.size: 1
     queue.type: memory
-    path.config: "C:\\logstash-6.4.1\\config\\elastic.pipeline.conf"
+    path.config: "C:\\logstash-6.5.4\\config\\elastic.pipeline.conf"
 
 # List of pipelines to be loaded by Logstash
 #

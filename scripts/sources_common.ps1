@@ -22,36 +22,25 @@ function Download-If-Missing ($expectedZipLocation, $downloadUri) {
     }
 }
 
-function Copy-App ($appFolderName, $sourcePath, $destinationPath) {
-    if ((Test-Path -Path ($destinationPath + $appFolderName) -Exclude *.zip) -eq $false) {
-        Copy-Item -Recurse -Path ($sourcePath + "\\" + $appFolderName) -Destination ($destinationPath + "jdk-" + $appFolderName) -Exclude *.zip
-    }
-}
+function Copy-File-If-Missing ($sourceFilePath, $destDirPath) {
+    $destFilePath = [System.IO.Path]::Combine($destDirPath, [System.IO.Path]::GetFileName($sourceFilePath))
 
-function Copy-File-If-Missing ($sourceFilePath, $destFilePath) {
     if ((Test-Path -Path $destFilePath) -eq $false) {
         Copy-Item -Path $sourceFilePath -Destination $destFilePath -Force
     }
 }
 
-function Get-JDK-App ($sourcesFolder) {
-    $jdkFolder = Get-ChildItem ($sourcesFolder + "\java*") -Directory
+function Extract-File-If-Missing ($zipFilePath, $destDirPath) {
+    $destFilePath = [System.IO.Path]::Combine($destDirPath, [System.IO.Path]::GetFileName($zipFilePath))
 
-    if($jdkFolder.length -eq 0) {
-        Write-Host "No JDK has been found in 'sources' folder"
-        return $null
-    } 
-    if ($jdkFolder.length -gt 1) {
-        Write-Host "More than one JDK was found in 'sources' folder"
-        return $null
-    } 
-    
-    $jdkFolder = $jdkFolder[0].Name
-    return $jdkFolder
+    if ((Test-Path -Path $destFilePath) -eq $false) {
+        Expand-Archive -Path $zipFilePath -DestinationPath $destDirPath
+    }
 }
 
 function DownloadFile {
 	# Courtesy of Jason Niver / https://blogs.msdn.microsoft.com/jasonn/2008/06/13/downloading-files-from-the-internet-in-powershell-with-progress/
+    # However I have made lots of changes in the mean time
 	param([string]$url, [string]$targetFile)
 
 	"Downloading $url ..."

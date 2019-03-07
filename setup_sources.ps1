@@ -6,24 +6,19 @@ Create-Folder-If-Missing "kibana\\sources"
 
 $openJdkZipPath = $PSScriptRoot + "\\sources\\" + $OpenJDKZipFile
 Download-If-Missing $openJdkZipPath $OpenJDKUri
-if ((Test-Path -Path "sources\\java*" -Exclude *.zip) -eq $false) {
-    Expand-Archive -Path $openJdkZipPath -DestinationPath "sources"
-}
-
-$jdkFolder = Get-JDK-App "sources"
-if($null -ne $jdkFolder) {
-    Copy-App $jdkFolder "sources" "elasticsearch\\sources\\"
-    Copy-App $jdkFolder "sources" "logstash\\sources\\"
-}
+Copy-File-If-Missing $openJdkZipPath "elasticsearch\\sources\\"
+Copy-File-If-Missing $openJdkZipPath "logstash\\sources\\"
+Extract-File-If-Missing "elasticsearch\\sources\\$OpenJDKZipFile" "elasticsearch\\sources"
+Extract-File-If-Missing "logstash\\sources\\$OpenJDKZipFile" "logstash\\sources"
 
 $elasticSearchZipPath = $PSScriptRoot + "\\sources\\" + $ElasticSearchOssZipFile
 Download-If-Missing $elasticSearchZipPath $ElasticSearchOssDownloadUri
-Copy-File-If-Missing $elasticSearchZipPath "elasticsearch\\sources\\${ElasticSearchOssZipFile}"
+Copy-File-If-Missing $elasticSearchZipPath "elasticsearch\\sources"
 
 $logstashZipPath = $PSScriptRoot + "\\sources\\" + $LogstashOssZipFile
 Download-If-Missing $logstashZipPath $LogstashOssDownloadUri
-Copy-File-If-Missing $logstashZipPath "logstash\\sources\\${LogstashOssZipFile}"
+Copy-File-If-Missing $logstashZipPath "logstash\\sources"
 
 $kibanaZipPath = $PSScriptRoot + "\\sources\\" + $KibanaOssZipfile
 Download-If-Missing $kibanaZipPath $KibanaOssDownloadUri
-Copy-File-If-Missing $kibanaZipPath "kibana\\sources\\${KibanaOssZipfile}"
+Copy-File-If-Missing $kibanaZipPath "kibana\\sources"

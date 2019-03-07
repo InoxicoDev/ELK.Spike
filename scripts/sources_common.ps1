@@ -54,19 +54,26 @@ function DownloadFile {
 	# Courtesy of Jason Niver / https://blogs.msdn.microsoft.com/jasonn/2008/06/13/downloading-files-from-the-internet-in-powershell-with-progress/
 	param([string]$url, [string]$targetFile)
 
-	"Downloading $url"
+	"Downloading $url ..."
 	$uri = New-Object "System.Uri" "$url"
 	$request = [System.Net.HttpWebRequest]::Create($uri)
 	$request.ServicePoint.Expect100Continue = $false;
 	$request.ProtocolVersion = [System.Net.HttpVersion]::Version11;
 	$request.set_Timeout(15000) # 15 second timeout
+    $tempDownloadFile = $targetFile + ".download"
+
+    if ((Test-Path -Path $tempDownloadFile) -eq $true) {
+        Remove-Item $tempDownloadFile
+    }
+
+    $finished = $false
 	$response = $request.GetResponse()
 	Try {
-		$totalLength = [System.Math]::Floor($response.get_ContentLength()/1024)
+		$totalLength = [System.Math]::Floor($response.get_ContentLength() / 1024)
 		
 		$responseStream = $response.GetResponseStream()
 		Try {
-			$targetStream = [System.IO.FileStream]::new($targetFile, [System.IO.FileMode]::Create)
+			$targetStream = [System.IO.FileStream]::new($tempDownloadFile, [System.IO.FileMode]::Create)
 			Try {
 				$buffer = new-object byte[] 10KB
 				$count = $responseStream.Read($buffer,0,$buffer.length)
@@ -74,7 +81,7 @@ function DownloadFile {
 				while ($count -gt 0)
 				{ 
 				  $downloaded = [System.Math]::Floor($downloadedBytes/1024)
-				  Write-Progress -Activity "Downloading $targetFile ..." -Status "$downloaded K / $totalLength K" -PercentComplete ($downloaded / $totalLength * 100)
+				  Write-Progress -Activity "Downloading $url ..." -Status "$downloaded K / $totalLength K" -PercentComplete ($downloaded / $totalLength * 100)
 				  $targetStream.Write($buffer, 0, $count)
 				  $count = $responseStream.Read($buffer,0,$buffer.length)
 				  $downloadedBytes = $downloadedBytes + $count
@@ -82,6 +89,7 @@ function DownloadFile {
 				"`nFinished Download"
 				$targetStream.Flush()
 				$targetStream.Close()
+                $finished = $true
 			}
 			Finally {
 				$targetStream.Dispose()
@@ -94,4 +102,8 @@ function DownloadFile {
 	Finally {
 		$response.Dispose()
 	}
+
+    if ($finished) {
+        Rename-Item -Path ($targetFile + ".download") -NewName $targetFile
+    }
 }

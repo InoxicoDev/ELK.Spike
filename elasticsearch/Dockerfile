@@ -1,6 +1,6 @@
 FROM microsoft/nanoserver
 
-ARG ELASTICSEARCH_VERSION=6.4.1
+ARG ELASTICSEARCH_VERSION=6.7.0
 
 COPY sources /
 

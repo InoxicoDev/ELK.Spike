@@ -1,4 +1,4 @@
-$TargetVersionELK = "6.5.4"
+$TargetVersionELK = "6.7.0"
 
 $OpenJDKZipFile = "java-1.8.0-openjdk-1.8.0.191-1.b12.ojdkbuild.windows.x86_64.zip"
 $ElasticSearchOssZipFile = "elasticsearch-oss-${TargetVersionELK}.zip"

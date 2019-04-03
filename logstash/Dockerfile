@@ -1,6 +1,6 @@
 FROM microsoft/nanoserver
 
-ARG LOGSTASH_VERSION=6.4.1
+ARG LOGSTASH_VERSION=6.7.0
 
 COPY sources /
 

@@ -3,8 +3,13 @@ FROM microsoft/nanoserver
 ARG LOGSTASH_VERSION=6.4.1
 
 COPY sources /
+
+RUN powershell.exe -Command \
+    Expand-Archive -Path \java*.zip -DestinationPath \ ; \
+    Remove-Item -Path \java*.zip ;
+
 # Set the JAVA_HOME environment variable to match the version copied in
-RUN for /d %i in (jdk*) do setx /m JAVA_HOME %~fi
+RUN for /d %i in (java*) do setx /m JAVA_HOME %~fi
 
 # Build variable to allow passing in a specific version of LogStash to download
 ARG LOGSTASH_SOURCE=logstash-oss-${LOGSTASH_VERSION}

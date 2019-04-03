@@ -29,3 +29,10 @@ Compile and run the `Logstash Logger` application found in the "tests" folder.
 ## Checking results
 
 So the test application should have sent a log message to `Logstash` which would eventually propagate it to `Elastic Search` and you should be able to view the results in `Kibana` by browsing to [http://localhost:5601](http://localhost:5601).
+
+## Troubleshooting
+
+In the event that you encounter the following problems, here are some solutions:
+
+> ERROR: for kibana  Cannot start service kibana: network ...long string id... not found
+Try and run: `docker-compose down`

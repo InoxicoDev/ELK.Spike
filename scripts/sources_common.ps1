@@ -67,13 +67,20 @@ function DownloadFile {
 				$buffer = new-object byte[] 10KB
 				$count = $responseStream.Read($buffer,0,$buffer.length)
 				$downloadedBytes = $count
+				$prevTime = [System.DateTime]::Now
 				while ($count -gt 0)
-				{ 
-				  $downloaded = [System.Math]::Floor($downloadedBytes/1024)
-				  Write-Progress -Activity "Downloading $url ..." -Status "$downloaded K / $totalLength K" -PercentComplete ($downloaded / $totalLength * 100)
-				  $targetStream.Write($buffer, 0, $count)
-				  $count = $responseStream.Read($buffer,0,$buffer.length)
-				  $downloadedBytes = $downloadedBytes + $count
+				{
+					$curtime = [System.DateTime]::Now
+					$span = $curtime - $prevTime
+					if ($span.TotalMilliseconds -ge 1000) {
+						$downloaded = [System.Math]::Floor($downloadedBytes/1024)
+						Write-Progress -Activity "Downloading $url ..." -Status "$downloaded K / $totalLength K" -PercentComplete ($downloaded / $totalLength * 100)
+						$prevTime = [System.DateTime]::Now  
+					}
+
+				  	$targetStream.Write($buffer, 0, $count)
+				  	$count = $responseStream.Read($buffer,0,$buffer.length)
+				  	$downloadedBytes = $downloadedBytes + $count
 				} 
 				"`nFinished Download"
 				$targetStream.Flush()

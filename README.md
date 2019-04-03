@@ -35,4 +35,5 @@ So the test application should have sent a log message to `Logstash` which would
 In the event that you encounter the following problems, here are some solutions:
 
 > ERROR: for kibana  Cannot start service kibana: network ...long string id... not found
+
 Try and run: `docker-compose down`

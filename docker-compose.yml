@@ -1,20 +1,23 @@
 version: '2.4'
 services:
   elasticsearch:
-    image: elasticsearch:latest
+    image: win-elasticsearch:6.7.0
+    build: ./elasticsearch
     mem_limit: 4g
     networks:
       - elastic-stack
   
   logstash:
-    image: logstash:latest
+    image: win-logstash:6.7.0
+    build: ./logstash
     ports: [ '9201:9201' ]
     networks:
       - elastic-stack
     mem_limit: 4g
 
   kibana:
-    image: kibana:latest
+    image: win-kibana:6.7.0
+    build: ./kibana
     ports: [ '5601:5601' ]
     networks:
       - elastic-stack
